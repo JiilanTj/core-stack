@@ -82,10 +82,13 @@ services:
       GITEA__database__NAME: ${GITEA_DB_NAME:-gitea_db}
       GITEA__database__USER: ${GITEA_DB_USER:-gitea_user}
       GITEA__database__PASSWD: ${GITEA_DB_PASSWORD:-WaduhAngkongNangLai11221212}
+
       GITEA__server__ROOT_URL: ${GITEA_ROOT_URL:-http://localhost:3636/}
       GITEA__server__HTTP_PORT: ${GITEA_INTERNAL_HTTP_PORT:-3000}
-      GITEA__server__SSH_PORT: ${GITEA_INTERNAL_SSH_PORT:-2222}
+      
       GITEA__server__START_SSH_SERVER: true
+      GITEA__server__SSH_PORT: 2222
+      GITEA__server__SSH_LISTEN_PORT: 2222
     ports:
       - "${GITEA_HTTP_PORT:-3636}:3000"
       - "${GITEA_SSH_PORT:-2222}:2222"
