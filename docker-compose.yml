@@ -40,32 +40,32 @@ services:
       retries: 5
       start_period: 5s
 
-  sso-service:
-    build: ./sso-service
-    container_name: sso-service
-    restart: always
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    environment:
-      APP_ENV: ${APP_ENV:-development}
-      APP_PORT: ${APP_PORT:-8000}
-      APP_HOST: ${APP_HOST:-0.0.0.0}
-      LOG_LEVEL: ${LOG_LEVEL:-info}
-      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres123}@core-postgres:5432/sso_db?sslmode=disable
-      REDIS_URL: redis://:${REDIS_PASSWORD:-redis123}@core-redis:6379
-      JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY:-}
-      JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY:-}
-      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-15}
-      JWT_REFRESH_DAYS: ${JWT_REFRESH_DAYS:-7}
-      JWT_ISSUER: ${JWT_ISSUER:-sso-service}
-      JWT_AUDIENCE: ${JWT_AUDIENCE:-api}
-    ports:
-      - "${SSO_SERVICE_PORT:-8001}:8000"
-    networks:
-      - core-network
+  # sso-service:
+  #   build: ./sso-service
+  #   container_name: sso-service
+  #   restart: always
+  #   depends_on:
+  #     postgres:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   environment:
+  #     APP_ENV: ${APP_ENV:-development}
+  #     APP_PORT: ${APP_PORT:-8000}
+  #     APP_HOST: ${APP_HOST:-0.0.0.0}
+  #     LOG_LEVEL: ${LOG_LEVEL:-info}
+  #     DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres123}@core-postgres:5432/sso_db?sslmode=disable
+  #     REDIS_URL: redis://:${REDIS_PASSWORD:-redis123}@core-redis:6379
+  #     JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY:-}
+  #     JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY:-}
+  #     JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-15}
+  #     JWT_REFRESH_DAYS: ${JWT_REFRESH_DAYS:-7}
+  #     JWT_ISSUER: ${JWT_ISSUER:-sso-service}
+  #     JWT_AUDIENCE: ${JWT_AUDIENCE:-api}
+  #   ports:
+  #     - "${SSO_SERVICE_PORT:-8001}:8000"
+  #   networks:
+  #     - core-network
 
   gitea:
     image: gitea/gitea:1.22
